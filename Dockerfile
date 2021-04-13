@@ -14,6 +14,6 @@ RUN pip install -r requirements.txt
 
 # Adiciona todos os arquivos do contexto (.) para o workdir (.)
 ADD . .
-
+EXPOSE 80
 # Unica linha que não vai "rodar" agora, fica na imagem esperando o docker run (e pode ser sobrescrita)
 CMD python main.py
