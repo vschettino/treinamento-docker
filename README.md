@@ -32,4 +32,24 @@ docker run --rm abc ls # ultimo parametro sobrescreve o CMD no Dockerfile
 - É possível limitar determinados protocolos (udp/tcp) e mapear faixas de portas com `-p 7000-8000:7000-8000` por exemplo.  
 # D4 - ENVs e ARGs
 
+- `ARGS` ficam disponíveis durante o `build` e podem ser passados por linha de comando. 
+- Para que `ARGS` sejam utilizados eles precisam ser definidos no Dockerfile (diretiva `ARG`)
+- `ARGS` podem ser definidos com valores default `ARG nome=default`.
+- `ARGS` não ficam diretamente disponíveis durante o `run`. Para que isso seja possível é necessário definir uma variável de ambiente (`ENV`) que recebe o valor do `ARG`.
+- `ARGS` podem ser passados com o parâmetro `--build-arg nome=default`, que pode ser definido várias vezes (um para cada `ARG`)
+- Variáveis de ambiente `ENV` são uma construção bem antiga e standard dos sistemas linux, podendo ser acessadas por qualquer linguagem de programação moderna
+- No docker, as variáveis de ambiente do hospedeiro **não** são automaticamente disponibilizadas dentro do container.
+- Você pode passar variáveis de ambiente usando a tag `-e variavel=valor` dentro durante o `run` ou criando um "env file" e especificando a tag `--env-file .env`.
+
+
 # D5 - Comandos úteis
+- `docker pull`: faz o download da versão mais atual de uma imagem/tag
+- `docker create --name container_name image_name:tag`: cria o container sem executá-lo
+- `docker start|stop|kill`: gerencia o ciclo de vida dos containers
+- `docker ps`: lista todos os containers ativos. Parecido com `docker container ls`. `-a` faz com que os containers desligados apareçam também na lista
+- `docker inspect`: imprime todas as informações de um componente docker. Funciona com volumes, imagens e containers.  Útil para debug.
+- `docker volume ls`: lista os volumes existentes
+- `docker container|image|system prune`: limpeza (especialmente de disco) dos componentes docker
+- `docker logs (-f) container_name`: imprime os logs de um container. O `-f` faz com que os logs novos continuem sendo mostrados.  
+
+# D6 - Docker Compose

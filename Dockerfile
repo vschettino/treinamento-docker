@@ -14,6 +14,8 @@ RUN pip install -r requirements.txt
 
 # Adiciona todos os arquivos do contexto (.) para o workdir (.)
 ADD . .
-
+EXPOSE 80
+ARG JOB_NAME="treinamento"
+ENV JOB_NAME=$JOB_NAME
 # Unica linha que não vai "rodar" agora, fica na imagem esperando o docker run (e pode ser sobrescrita)
-CMD python main.py
+CMD python main.py $JOB_NAME
